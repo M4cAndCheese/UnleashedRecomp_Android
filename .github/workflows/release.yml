@@ -17,7 +17,7 @@ on:
         default: 'android'
       game_url:
         description: 'URL for game data (ISO/XEX/ZIP/7Z/RAR) - always required for compilation'
-        required: true
+        required: false
         type: string
       update_url:
         description: 'URL for update data (default.xexp/ZIP/7Z/RAR) (optional)'
