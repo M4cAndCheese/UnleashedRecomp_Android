@@ -107,7 +107,14 @@ jobs:
             if [ -z "$url" ]; then return 0; fi
             echo "::add-mask::${url}"
             # Use --content-disposition to preserve original filenames
-            wget --no-check-certificate --content-disposition --tries=10 --retry-connrefused --waitretry=10 --timeout=60 -q -P ./UnleashedRecompLib/private/ "${url}"
+            if [[ "$url" == *"drive.google.com"* ]]; then
+                gdown --fuzzy "$url" -O ./UnleashedRecompLib/private/
+            else
+                wget --no-check-certificate --content-disposition \
+                     --tries=10 --retry-connrefused \
+                     --waitretry=10 --timeout=60 \
+                     -q -P ./UnleashedRecompLib/private/ "$url"
+            fi
           }
 
           handle_url "$GAME_URL"
