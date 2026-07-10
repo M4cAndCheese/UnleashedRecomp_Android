@@ -138,9 +138,7 @@ jobs:
 
          
 
-          handle_url "$GAME_URL"
-          handle_url "$UPDATE_URL"
-          handle_url "$DLC_URL"
+         
 
           if [ -d "./private" ]; then
             cp -rv private/* ./UnleashedRecompLib/private/ 2>/dev/null || true
