@@ -112,20 +112,31 @@ jobs:
         run: |
           mkdir -p ./UnleashedRecompLib/private
 
-          handle_url() {
-            local url="$1"
-            if [ -z "$url" ]; then return 0; fi
-            echo "::add-mask::${url}"
-            # Use --content-disposition to preserve original filenames
-            if [[ "$url" == *"drive.google.com"* ]]; then
-                python3 -m gdown "1unifqP0RbcA7QzQ8eHCku6m57-nsRW2A" -O "./UnleashedRecompLib/private/game.7z"
-            else
-                wget --no-check-certificate --content-disposition \
-                     --tries=10 --retry-connrefused \
-                     --waitretry=10 --timeout=60 \
-                     -q -P ./UnleashedRecompLib/private/ "$url"
-            fi
-          }
+          BASE="https://github.com/M4cAndCheese/UnleashedRecomp_Android/releases/download/game-data"
+
+          wget --tries=10 --retry-connrefused --waitretry=10 --timeout=60 \
+            -O ./UnleashedRecompLib/private/Sonic.Unleashed.USA.En.Ja.Fr.De.Es.It.7z.001 \
+            "$BASE/Sonic.Unleashed.USA.En.Ja.Fr.De.Es.It.7z.001"
+
+          wget --tries=10 --retry-connrefused --waitretry=10 --timeout=60 \
+            -O ./UnleashedRecompLib/private/Sonic.Unleashed.USA.En.Ja.Fr.De.Es.It.7z.002 \
+            "$BASE/Sonic.Unleashed.USA.En.Ja.Fr.De.Es.It.7z.002"
+
+          wget --tries=10 --retry-connrefused --waitretry=10 --timeout=60 \
+            -O ./UnleashedRecompLib/private/Sonic.Unleashed.USA.En.Ja.Fr.De.Es.It.7z.003 \
+            "$BASE/Sonic.Unleashed.USA.En.Ja.Fr.De.Es.It.7z.003"
+
+          wget --tries=10 --retry-connrefused --waitretry=10 --timeout=60 \
+            -O ./UnleashedRecompLib/private/Sonic.Unleashed.USA.En.Ja.Fr.De.Es.It.7z.004 \
+            "$BASE/Sonic.Unleashed.USA.En.Ja.Fr.De.Es.It.7z.004"
+
+          7z x -y \
+            ./UnleashedRecompLib/private/Sonic.Unleashed.USA.En.Ja.Fr.De.Es.It.7z.001 \
+            -o./UnleashedRecompLib/private
+
+          rm -f ./UnleashedRecompLib/private/*.7z.00*
+
+         
 
           handle_url "$GAME_URL"
           handle_url "$UPDATE_URL"
