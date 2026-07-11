@@ -477,8 +477,8 @@ jobs:
           # -XX:Min/MaxHeapFreeRatio: aggressively release unused heap back to OS
           # Daemon/parallel disabled to reduce memory footprint during native compilation
           export GRADLE_OPTS="-Xmx2048m -XX:+UseSerialGC -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=25 -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dorg.gradle.workers.max=1"
-          ./gradlew assembleRelease --stacktrace --info --debug --max-workers=1 --no-daemon
-
+          ./gradlew assembleRelease --stacktrace --max-workers=1 --no-daemon
+          
       - name: Build Linux
         if: env.OS == 'linux'
         run: |
